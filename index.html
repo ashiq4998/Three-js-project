@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My Reading Room</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/three.js"></script>
+    <script>
+    
+        let speed=.01;
+        var keyboard = {};
+        var degree=0;
+        var renderer,scene,camera;
+        var ambientLight, light;
+
+        
+       
+        function init()
+        {
+        scene = new THREE.Scene();
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        renderer.setClearColor( 0x000000, 1);
+        renderer.clear();
+
+        //new new THREE.PerspectiveCamera(FOV, viewAspectRatio, zNear, zFar)
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        //width', 'height', and 'depth'
+
+
+        
+
+        const geometry1 = new THREE.BoxGeometry(.2, 2, .2);
+        const texture1 = new THREE.TextureLoader().load('images/crate.jpg');
+        const texture2 = new THREE.TextureLoader().load('images/check.png');
+         const texture3 = new THREE.TextureLoader().load('images/chair.jpg');
+        const texture4 = new THREE.TextureLoader().load('images/chair2.jpg');
+        
+        const material1 = new THREE.MeshBasicMaterial({
+           map: texture1
+        });
+        const stand1 = new THREE.Mesh(geometry1, material1);
+        stand1.position.set(-2,1.25,.2);
+        scene.add(stand1);
+
+        const geometry2 = new THREE.BoxGeometry(.2, 2, .3);
+        const material2 = new THREE.MeshBasicMaterial({
+            map: texture1
+        });
+
+        const stand2 = new THREE.Mesh(geometry2, material2);
+        stand2.position.set(1.5,1.25,.2);
+        scene.add(stand2);
+
+
+
+        const geometry3 = new THREE.BoxGeometry(.2, 1.5, .3);
+        const material3 = new THREE.MeshBasicMaterial({
+            map: texture1
+        });
+        const stand3 = new THREE.Mesh(geometry3, material3);
+        stand3.position.set(-1.5,1.5,.2);
+        scene.add(stand3);
+
+        const geometry4 = new THREE.BoxGeometry(.2, 1.5, .3);
+        const material4 = new THREE.MeshBasicMaterial({
+            map: texture1
+        });
+
+        const stand4 = new THREE.Mesh(geometry4, material4);
+        stand4.position.set(1,1.45,.2);
+        scene.add(stand4);
+        
+        
+        const geometry7 = new THREE.BoxGeometry(.2, 1.6, .3);
+        const material7 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand7 = new THREE.Mesh(geometry7, material7);
+        stand7.position.set(1.09,-2.6,0);
+        scene.add(stand7);
+        
+        const geometry8 = new THREE.BoxGeometry(.2, 1.6, .3);
+        const material8 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand8 = new THREE.Mesh(geometry8, material8);
+        stand8.position.set(-1.57,-2.6,0);
+        scene.add(stand8);
+        
+        const geometry9 = new THREE.BoxGeometry(.2, 1.4, .3);
+        const material9 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand9 = new THREE.Mesh(geometry9, material9);
+        stand9.position.set(-1.2,-2.5,-.35);
+        scene.add(stand9);
+        
+        const geometry10 = new THREE.BoxGeometry(.2, 1.4, .3);
+        const material10 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand10 = new THREE.Mesh(geometry10, material10);
+        stand10.position.set(.45,-2.5,-.35);
+        scene.add(stand10);
+        
+        const geometry11 = new THREE.BoxGeometry(.2, 2.7, .3);
+        const material11 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand11 = new THREE.Mesh(geometry11, material11);
+        stand11.position.set(-1.57,-1,0);
+        scene.add(stand11);
+        
+        
+        const geometry12 = new THREE.BoxGeometry(.2, 2.7, .3);
+        const material12 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand12 = new THREE.Mesh(geometry12, material12);
+        stand12.position.set(1.07,-1,0);
+        scene.add(stand12);
+        
+        const geometry13 = new THREE.BoxGeometry(2.9, .25, -.1);
+        const material13 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand13 = new THREE.Mesh(geometry13, material13);
+        stand13.position.set(-.25, .25, 0);
+        scene.add(stand13);
+        
+        
+        const geometry14 = new THREE.BoxGeometry(2.9, .25, -.1);
+        const material14 = new THREE.MeshBasicMaterial({
+            map: texture3
+        });
+
+        const stand14 = new THREE.Mesh(geometry14, material14);
+        stand14.position.set(-.25, -.8, 0);
+        scene.add(stand14);
+
+        const Planegeometry = new THREE.PlaneGeometry( 4, 1 );
+        const Planematerial1 = new THREE.MeshBasicMaterial( {map: texture1, side: THREE.DoubleSide} );
+        const plane1 = new THREE.Mesh( Planegeometry, Planematerial1 );
+        plane1.position.set(-.25,2.3,0);
+        plane1.rotateX( - Math.PI / 2);
+        scene.add(plane1);
+        
+        const Planegeometry2 = new THREE.PlaneGeometry( 3.2, 1 );
+        const Planematerial2 = new THREE.MeshBasicMaterial( {map: texture3, side: THREE.DoubleSide} );
+        const plane2 = new THREE.Mesh( Planegeometry2, Planematerial2 );
+        plane2.position.set(-.15, -1.8, -.3);
+        plane2.rotateX( - Math.PI / 2);
+        scene.add(plane2);
+        light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(-3, 6, -3);
+        light.castShadow = true;
+         light.shadow.camera.near = .5;
+        light.shadow.camera.far = 15;
+        scene.add(light);
+        
+
+        renderer.render(scene, camera); 
+
+        function keyDown(event) {
+        keyboard[event.keyCode] = true;
+        }
+
+        function keyUp(event) {
+        keyboard[event.keyCode] = false;
+        }
+
+        window.addEventListener('keydown', keyDown);
+        window.addEventListener('keyup', keyUp);
+
+        let onmousedown = function(){
+            material1.map = texture2;
+            material2.map = texture2;
+            material3.map = texture2;
+            material4.map = texture2;
+            Planematerial1.map=texture2;
+            material7.map = texture4;
+            material8.map = texture4;
+            material9.map = texture4;
+            material10.map = texture4;
+            material11.map = texture4;
+            material12.map = texture4;
+            material13.map = texture4;
+            material14.map = texture4;
+            Planematerial2.map=texture4;
+            
+        };
+        document.addEventListener("click", onmousedown, false);
+
+        animate();
+}
+
+
+        init();
+
+         
+       
+
+		
+		
+       
+		
+		//document.addEventListener("click", onmousedown2, false);
+		
+        
+
+
+        function animate() 
+    {
+
+    requestAnimationFrame(animate);
+
+    
+    if (keyboard[83]) {
+        camera.position.x -= Math.sin(camera.rotation.y) * speed;
+        camera.position.z -= -Math.cos(camera.rotation.y) * speed;
+    }
+    
+    if (keyboard[87]) {
+        camera.position.x += Math.sin(camera.rotation.y) * speed;
+        camera.position.z += -Math.cos(camera.rotation.y) * speed;
+    }
+    
+    if (keyboard[68]) {
+        camera.position.x += Math.sin(camera.rotation.y + Math.PI / 2) * speed;
+        camera.position.z += -Math.cos(camera.rotation.y + Math.PI / 2) * speed;
+    }
+  
+    if (keyboard[65]) {
+        camera.position.x += Math.sin(camera.rotation.y - Math.PI / 2) * speed;
+        camera.position.z += -Math.cos(camera.rotation.y - Math.PI / 2) * speed;
+    }
+
+   
+    if (keyboard[81]) {
+        camera.rotation.y -= Math.PI * 0.01;
+    }
+  
+    if (keyboard[69]) {
+        camera.rotation.y += Math.PI * 0.01;
+    }
+
+    //lightAnimation
+
+    if (degree < 360) {
+        degree += 0.5;
+    } else {
+        degree = 0;
+    }
+
+    light.position.x = Math.sin(degree * Math.PI / 180) * 3;
+    light.position.z = Math.cos(degree * Math.PI / 180) * 3;
+    //lightAnimation
+
+    renderer.render(scene, camera);
+    
+
+
+
+}
+
+
+
+
+    </script>
+</body>
+
+</html>
